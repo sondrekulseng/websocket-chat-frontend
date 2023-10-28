@@ -19,7 +19,7 @@ jobs:
           git pull
           cd ..
           sudo docker-compose stop node
-          sudo docker rmi ubuntu_node
           sudo docker container prune -f
           sudo docker rmi ubuntu_node -f
           sudo docker-compose up
+          echo "Frontend deployed to production \n" >> deploy.log
