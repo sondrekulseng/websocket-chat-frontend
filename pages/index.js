@@ -9,7 +9,7 @@ export default function HomePage() {
       <h3>Websocket chat</h3>
       <FormLogin/>
       <br/>
-    <p>Application created by <a href="https://sondre.kulseng.no">Sondre Kulseng</a></p>
+    <p>Application created by <a target="_blank" href="https://sondre.kulseng.no">Sondre Kulseng</a></p>
     </div>
   );
 }
