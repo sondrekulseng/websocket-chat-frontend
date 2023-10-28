@@ -129,7 +129,7 @@ export default function ChatRoom() {
     <div>
       <p><a href="/">HOMEPAGE</a></p>
       <MainContainer>
-        <ChatContainer style={{ height: "42em", overflow: "hidden" }}>
+        <ChatContainer style={{ height: "85vh", overflow: "hidden" }}>
             <ConversationHeader>
                 <ConversationHeader.Content userName=<h4>{roomId} chat</h4> info=<h5>Logged in as {username}</h5> />
                 </ConversationHeader>
