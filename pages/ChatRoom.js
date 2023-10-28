@@ -97,6 +97,7 @@ export default function ChatRoom() {
     }
 
     setMessageInput("");
+    window.scrollTo(0, 0);
   }
 
   function getChatUrl() {
