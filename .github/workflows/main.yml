@@ -1,13 +1,13 @@
-name: Deploy to production
+name: Deploy
 on: [push]
 jobs:
 
   build:
-    name: Build
+    name: Deploy to production
     environment: Production
     runs-on: ubuntu-latest
     steps:
-    - name: executing remote ssh commands using ssh key
+    - name: Executing remote SSH commands
       uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.HOST }}
