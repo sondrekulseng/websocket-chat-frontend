@@ -128,7 +128,7 @@ export default function ChatRoom() {
   return (
     <div>
       <MainContainer>
-        <ChatContainer style={{ height: "100vh", overflow: "hidden" }}>
+        <ChatContainer style={{ height: "90vh", overflow: "hidden" }}>
             <ConversationHeader>
                 <ConversationHeader.Content userName=<h4>{roomId} chat</h4> info=<h5>Logged in as {username}</h5> />
                 </ConversationHeader>
