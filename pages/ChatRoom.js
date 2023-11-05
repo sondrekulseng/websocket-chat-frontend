@@ -119,10 +119,10 @@ export default function ChatRoom() {
 
   if (username == null) {
     return (
-        <>
+        <div style={{paddingTop: "5vh", width: "80%", margin: "auto"}}>
           <h3>Join chatroom {roomId}</h3>
           <FormUsername/>
-        </>
+        </div>
     )
   }
 
