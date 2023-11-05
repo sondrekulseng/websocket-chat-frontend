@@ -155,6 +155,7 @@ export default function ChatRoom() {
       </MainContainer>
       <div style={{marginTop: "1em"}}>
         <button onClick={deleteChat}>Delete chat history</button>
+        <button onClick={getChatUrl}>Copy chat link</button>
       </div>
     </div>
   );
