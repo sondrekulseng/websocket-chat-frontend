@@ -147,7 +147,7 @@ export default function ChatRoom() {
             ))}
           </MessageList>
           <MessageInput
-            placeholder="Skriv melding"
+            placeholder="Type a message"
             onSend={(value) => send(value)}
             onChange={(value) => sendTyping(value)}
           />
