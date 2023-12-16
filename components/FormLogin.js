@@ -6,12 +6,25 @@ import { useRouter } from 'next/router';
 
 export function FormLogin() {
   const [username, setUsername] = useState('');
-  const [chatRoomId, setChatRoomId] = useState('');
+  const [chatRoomName, setChatRoomName] = useState('');
+  const backendBaseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
   const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    router.push('/ChatRoom?roomId='+chatRoomId+'&username='+username);
+    const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: chatRoomName
+                    })
+                };
+                
+    fetch(backendBaseUrl+"/api/create/room", requestOptions)
+        .then(response => response.text())
+        .then(response => router.push('/ChatRoom?roomId='+response+'&username='+username));
   }
 
   return (
@@ -28,13 +41,13 @@ export function FormLogin() {
      <Form.Group className="mb-3">
        <Form.Control
          type="text"
-         placeholder="Chat room id"
-         value={chatRoomId}
+         placeholder="Chat room name"
+         value={chatRoomName}
          required
-         onChange={(e) => setChatRoomId(e.target.value)}
+         onChange={(e) => setChatRoomName(e.target.value)}
        />
      </Form.Group>
-     <Button variant="primary" type="submit">Login</Button>
+     <Button variant="primary" type="submit">Create chatroom</Button>
    </Form>
   );
 }
