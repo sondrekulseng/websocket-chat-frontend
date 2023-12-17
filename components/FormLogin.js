@@ -7,8 +7,13 @@ import { useRouter } from 'next/router';
 export function FormLogin() {
   const [username, setUsername] = useState('');
   const [chatRoomName, setChatRoomName] = useState('');
+  const [isPublic, setIsPublic] = useState(false);
   const backendBaseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
   const router = useRouter();
+
+  const handleSwitchChange = () => {
+      setIsPublic(!isPublic);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +23,8 @@ export function FormLogin() {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        name: chatRoomName
+                        name: chatRoomName,
+                        isPublic: isPublic
                     })
                 };
                 
@@ -47,6 +53,15 @@ export function FormLogin() {
          onChange={(e) => setChatRoomName(e.target.value)}
        />
      </Form.Group>
+     <Form.Group className="mb-3">
+     <Form.Check // prettier-ignore
+        type="switch"
+        id="custom-switch"
+        label="Public chat room"
+        checked={isPublic}
+        onChange={handleSwitchChange}
+        />
+        </Form.Group>
      <Button variant="primary" type="submit">Create chatroom</Button>
    </Form>
   );
