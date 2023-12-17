@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
@@ -25,6 +26,10 @@ export function ChatRoomList() {
         return <p><strong>No public chat rooms</strong></p>
     }
 
+    function formatId(id) {
+        return "xxxx-" + id.substring(id.length - 12);
+    }
+
     return (
         <>
         <h4>Public chat rooms ({rooms.length})</h4>
@@ -38,8 +43,8 @@ export function ChatRoomList() {
           <tbody>
             {rooms.map((item) => (
               <tr key={item.id}>
-                <td>{item.name} <br/>({item.id})</td>
-                <td><Link href="/ChatRoom?roomId=[roomId}" as={`/ChatRoom?roomId=${item.id}`}>Join</Link></td>
+                <td>{item.name} <br/><i>({formatId(item.id)})</i></td>
+                <td><Button variant="primary" onClick={() => location.href = location.href + "/ChatRoom?roomId=" + item.id}>Join</Button></td>
               </tr>
             ))}
           </tbody>

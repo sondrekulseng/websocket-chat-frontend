@@ -11,7 +11,7 @@ export default function FormUsername() {
     const handleSubmit = (e) => {
         e.preventDefault();
         router.query.username = username;
-        router.push(router)
+        router.push(router);
       }
 
       return (

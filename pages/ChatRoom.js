@@ -139,7 +139,7 @@ export default function ChatRoom() {
   if (username == null) {
     return (
         <div style={{paddingTop: "5vh", width: "80%", margin: "auto"}}>
-          <h3>Join chatroom {room}</h3>
+          <h3>Join chatroom {room.name}</h3>
           <FormUsername/>
         </div>
     )
@@ -152,7 +152,7 @@ export default function ChatRoom() {
       <MainContainer>
         <ChatContainer style={{ height: "85vh", overflow: "hidden" }}>
             <ConversationHeader>
-                <ConversationHeader.Content userName=<h4>{room.name} chat ({room.isPublic ? "public" : "private"})</h4> info=<h5>Logged in as {username}</h5> />
+                <ConversationHeader.Content userName=<h4>{room.name} ({room.isPublic ? "public" : "private"})</h4> info=<h5>Logged in as {username}</h5> />
                 </ConversationHeader>
           <MessageList typingIndicator={typing !== "" ? <TypingIndicator content={typing} /> : ""}>
             {messages.length == 0 ? <strong>{noMessageMsg}</strong> : ""}
