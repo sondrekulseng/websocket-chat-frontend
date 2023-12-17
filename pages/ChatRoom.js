@@ -24,7 +24,9 @@ export default function ChatRoom() {
   const searchParams = useSearchParams();
   const username = searchParams.get('username');
   const roomId = searchParams.get('roomId');
+  const [room, setRoom] = useState();
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [messageInput, setMessageInput] = useState("");
   const [noMessageMsg, setNoMessageMsg] = useState("No messages yet... Be the first!");
   const [typing, setTyping] = useState("");
@@ -35,6 +37,18 @@ export default function ChatRoom() {
     function connectAndSubscribe() {
       if (roomId == null) {
         return;
+      } else {
+        fetch(backendBaseUrl+"/api/room/"+roomId)
+            .then(response => {
+                    if (!response.ok) {
+                        location.replace("/..");
+                    }
+                    return response.json();
+            })
+            .then(response => {
+                setRoom(response);
+                setLoading(false);
+            });
       }
 
       stompClient.connect({}, () => {
@@ -60,7 +74,12 @@ export default function ChatRoom() {
     return () => {
       socket.close();
     };
-  }, [roomId, username]);
+  }, [roomId, username, loading]);
+
+  if (loading) {
+    return <h4>Loading data...</h4>;
+  }
+
 
   const handleMessageInputChange = (e) => {
     setMessageInput(e);
@@ -120,18 +139,20 @@ export default function ChatRoom() {
   if (username == null) {
     return (
         <div style={{paddingTop: "5vh", width: "80%", margin: "auto"}}>
-          <h3>Join chatroom {roomId}</h3>
+          <h3>Join chatroom {room.name}</h3>
           <FormUsername/>
         </div>
     )
   }
+
+  console.log(room);
 
   return (
     <div>
       <MainContainer>
         <ChatContainer style={{ height: "85vh", overflow: "hidden" }}>
             <ConversationHeader>
-                <ConversationHeader.Content userName=<h4>{roomId} chat</h4> info=<h5>Logged in as {username}</h5> />
+                <ConversationHeader.Content userName=<h4>{room.name} ({room.isPublic ? "public" : "private"})</h4> info=<h5>Logged in as {username}</h5> />
                 </ConversationHeader>
           <MessageList typingIndicator={typing !== "" ? <TypingIndicator content={typing} /> : ""}>
             {messages.length == 0 ? <strong>{noMessageMsg}</strong> : ""}
